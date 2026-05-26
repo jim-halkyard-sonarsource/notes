@@ -52,8 +52,16 @@ flowchart TB
 ## Layered Architecture
 
 ```mermaid
-graph TD
-  
+flowchart LR
+%%    DEV -->|"① Code written, PR opened"| SCM
+%%    SCM -->|"② Gates passed, merge"| CICD
+%%    CICD -->|"③ Artifacts built & signed"| REG    
+%%    REG -->|"④ Artifacts promoted"| SEC
+%%    SEC -->|"⑤ Identity + policy enforced"| AI
+%%    AI -->|"⑥ Agent tasks approved"| GITOPS
+%%    GITOPS -->|"⑦ Deployed to cluster"| OBS
+%%    OBS -->|"⑧ Signals to production"| PROD
+
     subgraph DEV["① Developer Experience Layer"]
         Backstage["🏠 Backstage\nDeveloper Portal"]
         Copilot["🤖 GitHub Copilot\nAI Coding Assistant"]
@@ -120,12 +128,4 @@ graph TD
 
     PROD[("🏭 Production\nKubernetes · mTLS · Zero Trust")]
 
-    DEV -->|"① Code written, PR opened"| SCM
-    SCM -->|"② Gates passed, merge"| CICD
-    CICD -->|"③ Artifacts built & signed"| REG
-    REG -->|"④ Artifacts promoted"| SEC
-    SEC -->|"⑤ Identity + policy enforced"| AI
-    AI -->|"⑥ Agent tasks approved"| GITOPS
-    GITOPS -->|"⑦ Deployed to cluster"| OBS
-    OBS -->|"⑧ Signals to production"| PROD
   ```
