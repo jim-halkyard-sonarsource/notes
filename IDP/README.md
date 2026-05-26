@@ -61,6 +61,7 @@ This shows the layers in the architecture of the new IDP.
 ```mermaid
 flowchart TB
     subgraph DEV["Developer Experience Layer"]
+        direction LR
         Backstage["🏠 Backstage\nDeveloper Portal"]
         Copilot["🤖 GitHub Copilot\nAI Coding Assistant"]
         Devcontainers["⚡ Devcontainers\nDev Environments"]
@@ -69,14 +70,16 @@ flowchart TB
     end
 
     subgraph SCM["Source Control · Code Review · SAST"]
+        direction LR
         GitHub["📁 GitHub Enterprise\nRepo · Branch Protection"]
-        Sonar["🕵️ Sonar\nSecrets Scan · CLI"]
-        Sonar["📡🛡️ Sonar\nSAST · IDE & CI"]
-        Sonar["📡✅ Sonar\nSCA · Dependency CVEs"]
+        SonarSec["🕵️ Sonar\nSecrets Scan · CLI"]
+        SonarSAST["📡🛡️ Sonar\nSAST · IDE & CI"]
+        SonarSCA["📡✅ Sonar\nSCA · Dependency CVEs"]
         Gitar["🎸 Gitar\nAI ReviewA · I Code Review"]
     end
 
     subgraph CICD["CI/CD · Build · Test · Supply Chain"]
+        direction LR
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
         Launchable["⚡ Launchable\nAI Test Selection"]
@@ -84,6 +87,7 @@ flowchart TB
     end
 
     subgraph REG["Artifact · Model · Skill Registries"]
+        direction LR
         Harbor["🐳 Harbor\nContainer Registry"]
         Artifactory["📦 Artifactory\nPackage Proxy"]
         MLflow["🧠 MLflow\nModel Registry"]
@@ -92,6 +96,7 @@ flowchart TB
     end
 
     subgraph SEC["Security · Secrets · Identity · Compliance"]
+        direction LR
         Vault["🔑 Vault\nSecrets Management"]
         SPIRE["🔒 SPIRE\nWorkload Identity"]
         OPA["📋 OPA\nPolicy-as-Code"]
@@ -101,6 +106,7 @@ flowchart TB
     end
 
     subgraph AI["AI Orchestration · LLM Gateway · Agent Runtime"]
+        direction LR
         LiteLLM["🌐 LiteLLM\nLLM Gateway"]
         LangGraph["🔗 LangGraph\nAgent Orchestration"]
         Langfuse["👁️ Langfuse\nPrompt Versioning"]
@@ -109,6 +115,7 @@ flowchart TB
     end
 
     subgraph GITOPS["GitOps Delivery · Progressive Rollout · IaC"]
+        direction LR
         ArgoCD["🚀 ArgoCD\nGitOps Delivery"]
         ArgoRollouts["🎯 Argo Rollouts\nProgressive Delivery"]
         Pulumi["☁️ Pulumi\nIaC · AI-Assisted"]
@@ -117,6 +124,7 @@ flowchart TB
     end
 
     subgraph OBS["Observability · DORA · AI Metrics"]
+        direction LR
         OTel["📡 OpenTelemetry\nTraces · Metrics · Logs"]
         Grafana["📊 Grafana\nDashboards · Alerts"]
         LinearB["📈 LinearB\nEngineering Metrics"]
