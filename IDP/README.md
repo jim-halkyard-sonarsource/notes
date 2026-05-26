@@ -5,14 +5,14 @@ This shows a possible workflow for developers in the new world of agent-centric 
 
 ```mermaid
 flowchart TB
-    subgraph InnerLoop["Sonar MCP - Inner Loop"]
-        CAG["🧰 Context Augmentation"]
-        SQAA["🔒 Agentic Analysis"]
+    subgraph InnerLoop["AC/DC - Inner Loop"]
+        CAG["🧰 Sonar\nContext Augmentation"]
+        SQAA["🔒 Sonar\nAgentic Analysis"]
     end
-    subgraph OuterLoop["SonarQube - Outer Loop"]
-        Sonar["📡✅ SAST, SCA, Quality"]
+    subgraph OuterLoop["AC/DC - Outer Loop"]
+        Sonar["📡✅ Sonar\nSAST, SCA, Quality"]
         Gitar["🎸 Gitar\nAI Code Review"]
-        SQRA["📋 Remediation Agent"]
+        SQRA["📋 Sonar\nRemediation Agent"]
     end
     subgraph repo["repo"]
         Harbor["🐳 Harbor"]
@@ -27,7 +27,7 @@ flowchart TB
     end
 
     Dev(["👨‍💻 Developer"]) -- uses --> Agent["🤖 IDE & Agent"]
-    Agent --> SQIDE["🖥️⚡SQ for IDE\nConnected Mode"] & InnerLoop
+    Agent --> SQIDE["🖥️⚡ Sonar for IDE\nConnected Mode"] & InnerLoop
     SQIDE --> Agent
     SkillRepo["🗂️ Skills Repository"] --> Agent
     Agent -- scaffolds via --> Projen["📐 Projen"]
@@ -38,7 +38,7 @@ flowchart TB
     Agent -- opens PR to --> GitHub["📁 GitHub"]
     GitHub --> GHActions["🔧 GitHub Actions\nCI Pipeline"]
     GHActions --> OuterLoop & CodiumAI["🧪 CodiumAI\nGenerate Tests"] & Launchable["⚡ Launchable\nSelect Tests"] & Build["Build"] 
-    Build --> SonarSBOM["🏷️ SQAS\nSBOM"]
+    Build --> SonarSBOM["🏷️ SonarQube Advanced Security\nSBOM"]
     OuterLoop --> GHActions
     Build --> Sign["Cosign\nArtifact Signing"]
     Sign --> repo
@@ -65,7 +65,7 @@ flowchart TB
     subgraph DEV["① Developer Experience Layer"]
         direction TD
         Backstage["🏠 Backstage\nDeveloper Portal"]
-        Copilot["🤖 GitHub Copilot\nAI Coding Assistant"]
+        Agent["🤖 Agent\nAI Coding Assistant"]
         Devcontainers["⚡ Devcontainers\nDev Environments"]
         Projen["📐 Projen\nProject Scaffolding"]
         Sourcegraph["🔎 Sourcegraph\nCode Intelligence"]
@@ -73,11 +73,11 @@ flowchart TB
 
     subgraph SCM["② Source Control · Code Review · SAST"]
         direction TD
-        GitHub["📁 GitHub Enterprise\nRepo · Branch Protection"]
+        GitHub["📁 GitHub\nRepo"]
         SonarSec["🕵️ Sonar\nSecrets Scan · CLI"]
         SonarSAST["📡🛡️ Sonar\nSAST · IDE & CI"]
         SonarSCA["📡✅ Sonar\nSCA · Dependency CVEs"]
-        Gitar["🎸 Gitar\nAI ReviewA · I Code Review"]
+        Gitar["🎸 Gitar\nAI Code Review"]
     end
 
     subgraph CICD["③ CI/CD · Build · Test · Supply Chain"]
@@ -85,7 +85,7 @@ flowchart TB
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
         Launchable["⚡ Launchable\nAI Test Selection"]
-        SonarSBOM["🏷️ SQAS\nSBOM"]
+        SonarSBOM["🏷️ SonarQube Advanced Security\nSBOM"]
         Sign["Cosign\nArtifact Signing"]
     end
 
