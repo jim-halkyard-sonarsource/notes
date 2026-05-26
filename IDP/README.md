@@ -55,20 +55,12 @@ This shows the layers in the architecture of the new IDP.
 #### TODO:
 * Remove tools mentioned here that are not mentioned above
 * Move Sonar and other tools to the appropriate level
-* Simplify the number of levels 
+* Simplify the number of levels
+* Figure out why I can't have the overall chart TB and the subgraphs LR 
 
 ```mermaid
-flowchart LR
-%%    DEV -->|"① Code written, PR opened"| SCM
-%%    SCM -->|"② Gates passed, merge"| CICD
-%%    CICD -->|"③ Artifacts built & signed"| REG    
-%%    REG -->|"④ Artifacts promoted"| SEC
-%%    SEC -->|"⑤ Identity + policy enforced"| AI
-%%    AI -->|"⑥ Agent tasks approved"| GITOPS
-%%    GITOPS -->|"⑦ Deployed to cluster"| OBS
-%%    OBS -->|"⑧ Signals to production"| PROD
-
-    subgraph DEV["① Developer Experience Layer"]
+flowchart TB
+    subgraph DEV["Developer Experience Layer"]
         Backstage["🏠 Backstage\nDeveloper Portal"]
         Copilot["🤖 GitHub Copilot\nAI Coding Assistant"]
         Devcontainers["⚡ Devcontainers\nDev Environments"]
@@ -76,7 +68,7 @@ flowchart LR
         Sourcegraph["🔎 Sourcegraph\nCode Intelligence"]
     end
 
-    subgraph SCM["② Source Control · Code Review · SAST"]
+    subgraph SCM["Source Control · Code Review · SAST"]
         GitHub["📁 GitHub Enterprise\nRepo · Branch Protection"]
         Sonar["🕵️ Sonar\nSecrets Scan · CLI"]
         Sonar["📡🛡️ Sonar\nSAST · IDE & CI"]
@@ -84,14 +76,14 @@ flowchart LR
         Gitar["🎸 Gitar\nAI ReviewA · I Code Review"]
     end
 
-    subgraph CICD["③ CI/CD · Build · Test · Supply Chain"]
+    subgraph CICD["CI/CD · Build · Test · Supply Chain"]
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
         Launchable["⚡ Launchable\nAI Test Selection"]
         SyftCosign["🏷️ Syft + Cosign\nSBOM · Artifact Signing"]
     end
 
-    subgraph REG["④ Artifact · Model · Skill Registries"]
+    subgraph REG["Artifact · Model · Skill Registries"]
         Harbor["🐳 Harbor\nContainer Registry"]
         Artifactory["📦 Artifactory\nPackage Proxy"]
         MLflow["🧠 MLflow\nModel Registry"]
@@ -99,7 +91,7 @@ flowchart LR
         ProtectAI["🛡️ Protect AI\nModel Risk Scan"]
     end
 
-    subgraph SEC["⑤ Security · Secrets · Identity · Compliance"]
+    subgraph SEC["Security · Secrets · Identity · Compliance"]
         Vault["🔑 Vault\nSecrets Management"]
         SPIRE["🔒 SPIRE\nWorkload Identity"]
         OPA["📋 OPA\nPolicy-as-Code"]
@@ -108,7 +100,7 @@ flowchart LR
         Drata["📜 Drata\nCompliance Automation"]
     end
 
-    subgraph AI["⑥ AI Orchestration · LLM Gateway · Agent Runtime"]
+    subgraph AI["AI Orchestration · LLM Gateway · Agent Runtime"]
         LiteLLM["🌐 LiteLLM\nLLM Gateway"]
         LangGraph["🔗 LangGraph\nAgent Orchestration"]
         Langfuse["👁️ Langfuse\nPrompt Versioning"]
@@ -116,7 +108,7 @@ flowchart LR
         HITL["🧑‍⚖️ HITL Gate\nHuman-in-the-Loop"]
     end
 
-    subgraph GITOPS["⑦ GitOps Delivery · Progressive Rollout · IaC"]
+    subgraph GITOPS["GitOps Delivery · Progressive Rollout · IaC"]
         ArgoCD["🚀 ArgoCD\nGitOps Delivery"]
         ArgoRollouts["🎯 Argo Rollouts\nProgressive Delivery"]
         Pulumi["☁️ Pulumi\nIaC · AI-Assisted"]
@@ -124,7 +116,7 @@ flowchart LR
         Kyverno["📋 Kyverno\nK8s Admission Policy"]
     end
 
-    subgraph OBS["⑧ Observability · DORA · AI Metrics"]
+    subgraph OBS["Observability · DORA · AI Metrics"]
         OTel["📡 OpenTelemetry\nTraces · Metrics · Logs"]
         Grafana["📊 Grafana\nDashboards · Alerts"]
         LinearB["📈 LinearB\nEngineering Metrics"]
@@ -134,4 +126,21 @@ flowchart LR
 
     PROD[("🏭 Production\nKubernetes · mTLS · Zero Trust")]
 
-  ```
+    DEV --> SCM
+    SCM --> CICD
+    CICD --> REG
+    REG --> SEC
+    SEC --> AI
+    AI --> GITOPS
+    GITOPS --> OBS
+    OBS --> PROD
+
+%%    DEV -->|"① Code written, PR opened"| SCM
+%%    SCM -->|"② Gates passed, merge"| CICD
+%%    CICD -->|"③ Artifacts built & signed"| REG    
+%%    REG -->|"④ Artifacts promoted"| SEC
+%%    SEC -->|"⑤ Identity + policy enforced"| AI
+%%    AI -->|"⑥ Agent tasks approved"| GITOPS
+%%    GITOPS -->|"⑦ Deployed to cluster"| OBS
+%%    OBS -->|"⑧ Signals to production"| PROD
+```
