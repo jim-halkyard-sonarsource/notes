@@ -1,1 +1,1 @@
-[IDP Workflow](https://github.com/jim-halkyard-sonarsource/notes/IDP/workflow.md)
+[IDP Workflow](https://github.com/jim-halkyard-sonarsource/notes/blob/main/IDP/workflow.md)

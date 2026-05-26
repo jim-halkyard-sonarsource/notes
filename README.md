@@ -1,3 +1,3 @@
 # Notes
 
-[IDP](https://github.com/jim-halkyard-sonarsource/notes/IDP)
+[IDP](https://github.com/jim-halkyard-sonarsource/notes/blob/main/IDP/README.md)
