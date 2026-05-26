@@ -37,9 +37,10 @@ flowchart TB
     LLM -- returns code --> Agent
     Agent -- opens PR to --> GitHub["📁 GitHub"]
     GitHub --> GHActions["🔧 GitHub Actions\nCI Pipeline"]
-    GHActions --> OuterLoop & CodiumAI["🧪 CodiumAI\nGenerate Tests"] & Launchable["⚡ Launchable\nSelect Tests"] & SonarSBOM["🏷️ SQAS & Cosign \nSBOM & Sign"]
+    GHActions --> OuterLoop & CodiumAI["🧪 CodiumAI\nGenerate Tests"] & Launchable["⚡ Launchable\nSelect Tests"] & SonarSBOM["🏷️ SQAS\nSBOM"]
     OuterLoop --> GHActions
-    SonarSBOM --> repo
+    SonarSBOM --> Sign["Cosign\nArtifact Signing"]
+    Sign --> repo
     repo --> CD
     CD --> PROD[("🏭 Production")]
     PROD --> OTel["📡 OpenTelemetry"]
@@ -82,7 +83,8 @@ flowchart TB
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
         Launchable["⚡ Launchable\nAI Test Selection"]
-        SyftCosign["🏷️ Syft + Cosign\nSBOM · Artifact Signing"]
+        SonarSBOM["🏷️ SQAS\nSBOM"]
+        Sign["Cosign\nArtifact Signing"]
     end
 
     subgraph REG["④ Artifact · Model · Skill Registries"]
@@ -90,7 +92,7 @@ flowchart TB
         Harbor["🐳 Harbor\nContainer Registry"]
         Artifactory["📦 Artifactory\nPackage Proxy"]
         MLflow["🧠 MLflow\nModel Registry"]
-        SkillReg["🗂️ Skill Registry\nMCP / OpenAPI Catalog"]
+        SkillRepo["🗂️ Skills Repository\nMCP / OpenAPI Catalog"]
         ProtectAI["🛡️ Protect AI\nModel Risk Scan"]
     end
 
