@@ -56,12 +56,11 @@ This shows the layers in the architecture of the new IDP.
 * Remove tools mentioned here that are not mentioned above
 * Move Sonar and other tools to the appropriate level
 * Simplify the number of levels
-* Figure out why I can't have the overall chart TB and the subgraphs LR 
 
 ```mermaid
 flowchart TB
     subgraph DEV["Developer Experience Layer"]
-        direction LR
+        direction TD
         Backstage["🏠 Backstage\nDeveloper Portal"]
         Copilot["🤖 GitHub Copilot\nAI Coding Assistant"]
         Devcontainers["⚡ Devcontainers\nDev Environments"]
@@ -70,7 +69,7 @@ flowchart TB
     end
 
     subgraph SCM["Source Control · Code Review · SAST"]
-        direction LR
+        direction TD
         GitHub["📁 GitHub Enterprise\nRepo · Branch Protection"]
         SonarSec["🕵️ Sonar\nSecrets Scan · CLI"]
         SonarSAST["📡🛡️ Sonar\nSAST · IDE & CI"]
@@ -79,7 +78,7 @@ flowchart TB
     end
 
     subgraph CICD["CI/CD · Build · Test · Supply Chain"]
-        direction LR
+        direction TD
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
         Launchable["⚡ Launchable\nAI Test Selection"]
@@ -87,7 +86,7 @@ flowchart TB
     end
 
     subgraph REG["Artifact · Model · Skill Registries"]
-        direction LR
+        direction TD
         Harbor["🐳 Harbor\nContainer Registry"]
         Artifactory["📦 Artifactory\nPackage Proxy"]
         MLflow["🧠 MLflow\nModel Registry"]
@@ -96,7 +95,7 @@ flowchart TB
     end
 
     subgraph SEC["Security · Secrets · Identity · Compliance"]
-        direction LR
+        direction TD
         Vault["🔑 Vault\nSecrets Management"]
         SPIRE["🔒 SPIRE\nWorkload Identity"]
         OPA["📋 OPA\nPolicy-as-Code"]
@@ -106,7 +105,7 @@ flowchart TB
     end
 
     subgraph AI["AI Orchestration · LLM Gateway · Agent Runtime"]
-        direction LR
+        direction TD
         LiteLLM["🌐 LiteLLM\nLLM Gateway"]
         LangGraph["🔗 LangGraph\nAgent Orchestration"]
         Langfuse["👁️ Langfuse\nPrompt Versioning"]
@@ -115,7 +114,7 @@ flowchart TB
     end
 
     subgraph GITOPS["GitOps Delivery · Progressive Rollout · IaC"]
-        direction LR
+        direction TD
         ArgoCD["🚀 ArgoCD\nGitOps Delivery"]
         ArgoRollouts["🎯 Argo Rollouts\nProgressive Delivery"]
         Pulumi["☁️ Pulumi\nIaC · AI-Assisted"]
@@ -124,7 +123,7 @@ flowchart TB
     end
 
     subgraph OBS["Observability · DORA · AI Metrics"]
-        direction LR
+        direction TD
         OTel["📡 OpenTelemetry\nTraces · Metrics · Logs"]
         Grafana["📊 Grafana\nDashboards · Alerts"]
         LinearB["📈 LinearB\nEngineering Metrics"]
@@ -134,21 +133,13 @@ flowchart TB
 
     PROD[("🏭 Production\nKubernetes · mTLS · Zero Trust")]
 
-    DEV --> SCM
-    SCM --> CICD
-    CICD --> REG
-    REG --> SEC
-    SEC --> AI
-    AI --> GITOPS
-    GITOPS --> OBS
-    OBS --> PROD
 
-%%    DEV -->|"① Code written, PR opened"| SCM
-%%    SCM -->|"② Gates passed, merge"| CICD
-%%    CICD -->|"③ Artifacts built & signed"| REG    
-%%    REG -->|"④ Artifacts promoted"| SEC
-%%    SEC -->|"⑤ Identity + policy enforced"| AI
-%%    AI -->|"⑥ Agent tasks approved"| GITOPS
-%%    GITOPS -->|"⑦ Deployed to cluster"| OBS
-%%    OBS -->|"⑧ Signals to production"| PROD
+    DEV -->|"① Code written, PR opened"| SCM
+    SCM -->|"② Gates passed, merge"| CICD
+    CICD -->|"③ Artifacts built & signed"| REG    
+    REG -->|"④ Artifacts promoted"| SEC
+    SEC -->|"⑤ Identity + policy enforced"| AI
+    AI -->|"⑥ Agent tasks approved"| GITOPS
+    GITOPS -->|"⑦ Deployed to cluster"| OBS
+    OBS -->|"⑧ Signals to production"| PROD
 ```
