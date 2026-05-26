@@ -53,8 +53,10 @@ flowchart TB
     ArgoCD --> ArgoRollouts
     ArgoRollouts --> Kyverno
 ```
+
 ## Layered Architecture
 This shows the layers in the architecture of the new IDP.
+
 #### TODO:
 * Remove tools mentioned here that are not mentioned above
 * Move Sonar and other tools to the appropriate level
