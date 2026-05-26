@@ -37,10 +37,12 @@ flowchart TB
     LLM -- returns code --> Agent
     Agent -- opens PR to --> GitHub["📁 GitHub"]
     GitHub --> GHActions["🔧 GitHub Actions\nCI Pipeline"]
-    GHActions --> OuterLoop & CodiumAI["🧪 CodiumAI\nGenerate Tests"] & Launchable["⚡ Launchable\nSelect Tests"] & SonarSBOM["🏷️ SQAS\nSBOM"]
+    GHActions --> OuterLoop & CodiumAI["🧪 CodiumAI\nGenerate Tests"] & Launchable["⚡ Launchable\nSelect Tests"] & Build["Build"] 
+    Build --> SonarSBOM["🏷️ SQAS\nSBOM"]
     OuterLoop --> GHActions
-    SonarSBOM --> Sign["Cosign\nArtifact Signing"]
+    Build --> Sign["Cosign\nArtifact Signing"]
     Sign --> repo
+    SonarSBOM --> repo
     repo --> CD
     CD --> PROD[("🏭 Production")]
     PROD --> OTel["📡 OpenTelemetry"]
