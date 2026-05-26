@@ -1,9 +1,4 @@
 ```mermaid
----
-config:
-  theme: neo
-  layout: dagre
----
 flowchart TB
  subgraph InnerLoop["Sonar MCP - Inner Loop"]
         CAG["🧰 Context Augmentation"]
@@ -48,6 +43,4 @@ flowchart TB
     HITL -- approved --> ArgoCD
     ArgoCD --> ArgoRollouts
     ArgoRollouts --> Kyverno
-
-    style GitHub color:#D50000
     ```
