@@ -59,7 +59,7 @@ This shows the layers in the architecture of the new IDP.
 
 ```mermaid
 flowchart TB
-    subgraph DEV["Developer Experience Layer"]
+    subgraph DEV["① Developer Experience Layer"]
         direction TD
         Backstage["🏠 Backstage\nDeveloper Portal"]
         Copilot["🤖 GitHub Copilot\nAI Coding Assistant"]
@@ -68,7 +68,7 @@ flowchart TB
         Sourcegraph["🔎 Sourcegraph\nCode Intelligence"]
     end
 
-    subgraph SCM["Source Control · Code Review · SAST"]
+    subgraph SCM["② Source Control · Code Review · SAST"]
         direction TD
         GitHub["📁 GitHub Enterprise\nRepo · Branch Protection"]
         SonarSec["🕵️ Sonar\nSecrets Scan · CLI"]
@@ -77,7 +77,7 @@ flowchart TB
         Gitar["🎸 Gitar\nAI ReviewA · I Code Review"]
     end
 
-    subgraph CICD["CI/CD · Build · Test · Supply Chain"]
+    subgraph CICD["③ CI/CD · Build · Test · Supply Chain"]
         direction TD
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
@@ -85,7 +85,7 @@ flowchart TB
         SyftCosign["🏷️ Syft + Cosign\nSBOM · Artifact Signing"]
     end
 
-    subgraph REG["Artifact · Model · Skill Registries"]
+    subgraph REG["④ Artifact · Model · Skill Registries"]
         direction TD
         Harbor["🐳 Harbor\nContainer Registry"]
         Artifactory["📦 Artifactory\nPackage Proxy"]
@@ -94,7 +94,7 @@ flowchart TB
         ProtectAI["🛡️ Protect AI\nModel Risk Scan"]
     end
 
-    subgraph SEC["Security · Secrets · Identity · Compliance"]
+    subgraph SEC["⑤ Security · Secrets · Identity · Compliance"]
         direction TD
         Vault["🔑 Vault\nSecrets Management"]
         SPIRE["🔒 SPIRE\nWorkload Identity"]
@@ -104,7 +104,7 @@ flowchart TB
         Drata["📜 Drata\nCompliance Automation"]
     end
 
-    subgraph AI["AI Orchestration · LLM Gateway · Agent Runtime"]
+    subgraph AI["⑥ AI Orchestration · LLM Gateway · Agent Runtime"]
         direction TD
         LiteLLM["🌐 LiteLLM\nLLM Gateway"]
         LangGraph["🔗 LangGraph\nAgent Orchestration"]
@@ -113,7 +113,7 @@ flowchart TB
         HITL["🧑‍⚖️ HITL Gate\nHuman-in-the-Loop"]
     end
 
-    subgraph GITOPS["GitOps Delivery · Progressive Rollout · IaC"]
+    subgraph GITOPS["⑦ GitOps Delivery · Progressive Rollout · IaC"]
         direction TD
         ArgoCD["🚀 ArgoCD\nGitOps Delivery"]
         ArgoRollouts["🎯 Argo Rollouts\nProgressive Delivery"]
@@ -122,7 +122,7 @@ flowchart TB
         Kyverno["📋 Kyverno\nK8s Admission Policy"]
     end
 
-    subgraph OBS["Observability · DORA · AI Metrics"]
+    subgraph OBS["⑧ Observability · DORA · AI Metrics"]
         direction TD
         OTel["📡 OpenTelemetry\nTraces · Metrics · Logs"]
         Grafana["📊 Grafana\nDashboards · Alerts"]
