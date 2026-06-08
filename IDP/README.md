@@ -57,11 +57,6 @@ flowchart TB
 ## Layered Architecture
 This shows the layers in the architecture of the new IDP.
 
-#### TODO:
-* Remove tools mentioned here that are not mentioned above
-* Move Sonar and other tools to the appropriate level
-* Simplify the number of levels
-
 ```mermaid
 flowchart TB
     subgraph DEV["① Developer Experience Layer"]
