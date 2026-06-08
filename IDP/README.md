@@ -59,7 +59,7 @@ This shows the layers in the architecture of the new IDP.
 
 ```mermaid
 flowchart TB
-    subgraph DEV["① Developer Experience Layer"]
+    subgraph DEV["① Developer Experience Layer : Inner Loop"]
         direction TD
         GitHub["📁 GitHub\nRepo"]
         Agent["🤖 Agent\nAI Coding Assistant"]
@@ -71,7 +71,7 @@ flowchart TB
         Projen["📐 Projen\nProject Scaffolding"]
     end
 
-    subgraph CI["② CI · Build · Test · Supply Chain"]
+    subgraph CI["② CI · Build · Test · Supply Chain : Outer Loop"]
         direction TD
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
         SonarSCA["📡✅ Sonar\nSCA · Dependency CVEs"]
