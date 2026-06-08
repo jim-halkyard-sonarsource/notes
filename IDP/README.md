@@ -66,69 +66,41 @@ This shows the layers in the architecture of the new IDP.
 flowchart TB
     subgraph DEV["① Developer Experience Layer"]
         direction TD
-        Backstage["🏠 Backstage\nDeveloper Portal"]
+        GitHub["📁 GitHub\nRepo"]
         Agent["🤖 Agent\nAI Coding Assistant"]
+        SkillRepo["🗂️ Skills Repository\nMCP / OpenAPI Catalog"]
+        SonarSec["🕵️ Sonar\nSecrets Scan · CLI"]
+        SonarSAST["📡✅ Sonar\nQuality · Security · IDE"]
+        Backstage["🏠 Backstage\nDeveloper Portal"]
         Devcontainers["⚡ Devcontainers\nDev Environments"]
         Projen["📐 Projen\nProject Scaffolding"]
-        Sourcegraph["🔎 Sourcegraph\nCode Intelligence"]
     end
 
-    subgraph SCM["② Source Control · Code Review · SAST"]
-        direction TD
-        GitHub["📁 GitHub\nRepo"]
-        SonarSec["🕵️ Sonar\nSecrets Scan · CLI"]
-        SonarSAST["📡🛡️ Sonar\nSAST · IDE & CI"]
-        SonarSCA["📡✅ Sonar\nSCA · Dependency CVEs"]
-        Gitar["🎸 Gitar\nAI Code Review"]
-    end
-
-    subgraph CICD["③ CI/CD · Build · Test · Supply Chain"]
+    subgraph CI["② CI · Build · Test · Supply Chain"]
         direction TD
         GHActions["🔧 GitHub Actions\nPipeline Orchestration"]
+        SonarSCA["📡✅ Sonar\nSCA · Dependency CVEs"]
+        Gitar["🎸 Gitar\nAI Code Review"]
         CodiumAI["🧪 CodiumAI\nAI Test Generation"]
         Launchable["⚡ Launchable\nAI Test Selection"]
-        SonarSBOM["🏷️ SonarQube Advanced Security\nSBOM"]
         Sign["Cosign\nArtifact Signing"]
     end
 
-    subgraph REG["④ Artifact · Model · Skill Registries"]
+    subgraph REG["③ Artifact Repositories"]
         direction TD
         Harbor["🐳 Harbor\nContainer Registry"]
         Artifactory["📦 Artifactory\nPackage Proxy"]
-        MLflow["🧠 MLflow\nModel Registry"]
-        SkillRepo["🗂️ Skills Repository\nMCP / OpenAPI Catalog"]
-        ProtectAI["🛡️ Protect AI\nModel Risk Scan"]
     end
 
-    subgraph SEC["⑤ Security · Secrets · Identity · Compliance"]
+    subgraph CD["④ CD"]
         direction TD
-        Vault["🔑 Vault\nSecrets Management"]
-        SPIRE["🔒 SPIRE\nWorkload Identity"]
-        OPA["📋 OPA\nPolicy-as-Code"]
-        Lakera["🧠 Lakera Guard\nPrompt Injection"]
-        Falco["🦅 Falco\nRuntime Security"]
-        Drata["📜 Drata\nCompliance Automation"]
-    end
-
-    subgraph AI["⑥ AI Orchestration · LLM Gateway · Agent Runtime"]
-        direction TD
-        LiteLLM["🌐 LiteLLM\nLLM Gateway"]
-        LangGraph["🔗 LangGraph\nAgent Orchestration"]
-        Langfuse["👁️ Langfuse\nPrompt Versioning"]
-        Ragas["🧬 Ragas\nEval Framework"]
         HITL["🧑‍⚖️ HITL Gate\nHuman-in-the-Loop"]
-    end
-
-    subgraph GITOPS["⑦ GitOps Delivery · Progressive Rollout · IaC"]
-        direction TD
         ArgoCD["🚀 ArgoCD\nGitOps Delivery"]
         ArgoRollouts["🎯 Argo Rollouts\nProgressive Delivery"]
-        Pulumi["☁️ Pulumi\nIaC · AI-Assisted"]
-        Crossplane["🔧 Crossplane\nSelf-Service Infra"]
         Kyverno["📋 Kyverno\nK8s Admission Policy"]
     end
 
-    subgraph OBS["⑧ Observability · DORA · AI Metrics"]
+    subgraph OBS["⑤ Observability · DORA · AI Metrics"]
         direction TD
         OTel["📡 OpenTelemetry\nTraces · Metrics · Logs"]
         Grafana["📊 Grafana\nDashboards · Alerts"]
@@ -140,12 +112,10 @@ flowchart TB
     PROD[("🏭 Production\nKubernetes · mTLS · Zero Trust")]
 
 
-    DEV -->|"① Code written, PR opened"| SCM
-    SCM -->|"② Gates passed, merge"| CICD
-    CICD -->|"③ Artifacts built & signed"| REG    
-    REG -->|"④ Artifacts promoted"| SEC
-    SEC -->|"⑤ Identity + policy enforced"| AI
-    AI -->|"⑥ Agent tasks approved"| GITOPS
-    GITOPS -->|"⑦ Deployed to cluster"| OBS
-    OBS -->|"⑧ Signals to production"| PROD
+    DEV -->|"Code written, PR opened"| CI
+    CI -->|"Artifacts built & signed"| REG    
+    REG -->|"Artifacts promoted"| CD
+    CD -->|"Artifacts deployed"| OBS
+    OBS -->|"Signals to production"| PROD
+
 ```
